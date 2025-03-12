@@ -1,3 +1,6 @@
+# import the ramdom function!!
+import random
+
 # Check that users have entered a valid
 # option based on a list
 def string_checker(question, valid_ans=('yes', 'no')):
@@ -48,7 +51,6 @@ Good Luck!!!!
     ''')
 
 
-
 def int_check(question):
     """Checks users enter an integer more than 1"""
 
@@ -71,6 +73,29 @@ def int_check(question):
 
         except ValueError:
             print(error)
+
+
+# compare user / computer choice and returns
+# results (win / lose / tie)
+def rps_compare(user, comp):
+
+    # if the user and the computer choice is the same, it's a tie!
+    if user == comp:
+        result = "tie"
+
+    # There are three ways to win
+    elif user == "paper" and comp == "rock":
+        result = "win"
+    elif user == "scissors" and comp == "paper":
+        result = "win"
+    elif user == "rock" and comp == "scissors":
+        result = "win"
+    #if it's not a win / tie, then it's a loss
+    else:
+        result = "lose"
+
+    return result
+
 
 
 # Main routine starts here
@@ -103,20 +128,30 @@ if num_rounds == "infinite":
 
 # Game loop starts here
 while rounds_played < num_rounds:
-
+    # display heading!
     if mode == "infinite":
         rounds_heading = f"\n♾️♾️♾️Round {rounds_played + 1} (Infinite Mode)♾️♾️♾️"
 
     else:
         rounds_heading = f"\n📀💿📀 Rounds {rounds_played + 1} of {num_rounds}💿📀💿"
-
     print(rounds_heading)
     print()
+
+    # randomly choose from the rps list (excluding the exit code!!)
+    comp_choice = random.choice(rps_list[:-1])
+    print("Computer choice", comp_choice)
+
+    # gives a list of the choice's the user can choose!
     user_choice = string_checker("Choose: ", rps_list)
     print("you chose", user_choice)
-
+    # if the user types "xxx" the program will stop
     if user_choice == "xxx":
         break
+
+
+
+    result = rps_compare(user_choice, comp_choice)
+    print(f"{user_choice} vs {comp_choice}, {result}")
 
     rounds_played += 1
 
