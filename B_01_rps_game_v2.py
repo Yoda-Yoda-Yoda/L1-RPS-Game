@@ -146,17 +146,19 @@ while rounds_played < num_rounds:
     # gives a list of the choice's the user can choose!
     user_choice = string_checker("Choose: ", rps_list)
     print("you chose", user_choice)
-    # if the user types "xxx" the program will stop
-    if user_choice == "xxx" and rounds_played == 0 and mode == "infinite":
-        print("🐔🐤🐥🐔 Oops! You chickens out and didn’t play any rounds🐔🐤🐥🐔")
 
+    # print a statement if that user selected "infinite mode and didn't play any rounds!!!"
+    # if user_choice == "xxx" and rounds_played == 0 and mode == "infinite":
+    #     print("🐔🐤🐥🐔 Oops! You chickens out and didn’t play any rounds 🐔🐤🐥🐔")
+
+    # if the user types "xxx" the program will stop
     if user_choice == "xxx":
         break
 
 
-
     result = rps_compare(user_choice, comp_choice)
 
+    # depending on how if the user won / tied / lose it will give feedback!
     if result == "tie":
         rounds_tied += 1
         feedback = "💩💩💩 Why did you pick the exact same thing as the GOD DAM ROBOT! 💩💩💩"
@@ -182,25 +184,31 @@ while rounds_played < num_rounds:
 
 
 # Game loop ends here
+if rounds_played > 0:
+    # Game History / statistics area
+    # statistics
+    rounds_won = rounds_played - rounds_tied - rounds_lost
+    percent_won = rounds_won / rounds_played * 100
+    percent_lost = rounds_lost / rounds_played * 100
+    percent_tied = 100 - percent_won - percent_lost
 
-# Game History / statistics area
-# statistics
-rounds_won = rounds_played - rounds_tied - rounds_lost
-percent_won = rounds_won / rounds_played * 100
-percent_lost = rounds_lost / rounds_played * 100
-percent_tied = 100 - percent_won - percent_lost
-
-print("📊📊📊 Game Statistics 📊📊📊")
-print(f"😀 Won: {percent_won:.2f}  \t"
-      f"💩 Lost: {percent_lost:.2f}  \t"
-      f"💩 Tied: {percent_tied:.2f}")
+    print("📊📊📊 Game Statistics 📊📊📊")
+    print(f"😀 Won: {percent_won:.2f}  \t"
+          f"💩 Lost: {percent_lost:.2f}  \t"
+          f"💩 Tied: {percent_tied:.2f}")
 
 
-# game history
-game_history_show = input("Do you want to see your game history?  ")
+    # game history
+    game_history_show = string_checker("Do you want to see your game history?  ")
 
-if game_history_show.lower() == "yes" or game_history_show.lower() == "y":
-    print("Game History")
+    if game_history_show.lower() == "yes" or game_history_show.lower() == "y":
+        print("🎮🎮🎮 Game History 🎮🎮🎮")
 
-    for item in game_history:
-        print(item)
+        for item in game_history:
+            print(item)
+
+        print()
+        print("Thanks for playing")
+
+else:
+    print("🐔🐤🐥🐔 Oops! You chickens out and didn’t play any rounds🐔🐤🐥🐔 ")
